@@ -1,6 +1,5 @@
 import React, { useState }from 'react';
 import {
-  ScrollView,
   StyleSheet,
   Text,
   Button,
@@ -18,17 +17,15 @@ export default function HomeScreen() {
   const toText = (obj) => <BigText>{obj.text}</BigText>;
   const toCode = (obj) => <SyntaxHighlighter
     highlighter="prism"
+    customStyle={{padding: 0, margin: 0 }}
     language='javascript'>
       {obj.code}
     </SyntaxHighlighter>
 
-  const toComponent = obj => {
-    return obj.text 
-      ? toText(obj)
-      : obj.code
-        ? toCode(obj)
-        : <div></div>
-  };
+  const toComponent = obj => (<View>
+    {obj.text && toText(obj)}
+    {obj.code && toCode(obj)}
+  </View>);
 
   const translatedData = data.map(card => ({
     front: toComponent(card.front),
@@ -39,31 +36,29 @@ export default function HomeScreen() {
   const [key, setKey] = useState(0);
 
   return (
-      <ScrollView
-        style={styles.container}
-        contentContainerStyle={styles.contentContainer}>
-            <View style={styles.button}>
-              <Button
-                title="Back"
-                disabled={!translatedData[currentCard - 1]}
-                onPress={() => {
-                  setCurrentCard(currentCard - 1)
-                  setKey(key + 1);
-                }}
-              />
-            </View>
-            <Flashcard key={key} front={translatedData[currentCard].front} back={translatedData[currentCard].back} />
-            <View style={styles.button}>
-              <Button
-                title="Next"
-                disabled={!translatedData[currentCard + 1]}
-                onPress={() => {
-                  setCurrentCard(currentCard + 1);
-                  setKey(key + 1);
-                }}
-              />
-            </View>
-      </ScrollView>
+      <View style={styles.contentContainer}>
+        <View style={styles.button}>
+          <Button
+            title="Back"
+            disabled={!translatedData[currentCard - 1]}
+            onPress={() => {
+              setCurrentCard(currentCard - 1)
+              setKey(key + 1);
+            }}
+          />
+        </View>
+        <Flashcard key={key} front={translatedData[currentCard].front} back={translatedData[currentCard].back} />
+        <View style={styles.button}>
+          <Button
+            title="Next"
+            disabled={!translatedData[currentCard + 1]}
+            onPress={() => {
+              setCurrentCard(currentCard + 1);
+              setKey(key + 1);
+            }}
+          />
+        </View>
+      </View>
   );
 }
 

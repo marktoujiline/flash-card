@@ -81,5 +81,32 @@
       "back": {
         "text": "Figure out what you know\nIsolate the problem\nRead the error message correctly\n\tThe messages print things that you don't need\n\tThe actual error could be anywhere in the message\nRubber duck technique (do it in Slack)\n- while (bugNotFixed {\n\taskQuestions();\n\tgetAnswer();\n})"
       }
+    },
+      {
+      "front": {
+        "text": "TS type keyword"
+      },
+      "back": {
+        "text": "Similar to const/let/var, except instead of assigning expression, it assigns a type.",
+        "code": "type UserId = number;\nconst userId: UserId = 5\nuserId + 3;"
+      }
+    },
+    {
+      "front": {
+        "text": "TS interface"
+      },
+      "back": {
+        "text": "Defines the type for an object.",
+        "code": "interface User {\n\tfirst: string;\n\tlast: string;\n\t}\n//valid\nconst user: User={first: 'Hello', last: 'World'};\n//invalid, missing last field\nconst user: User={first: 'Hello'};"
+      }
+    },
+    {
+      "front": {
+        "text": "Structural typing"
+      },
+      "back": {
+        "text": "A type passes for another type if all reqs are met. Extra fields can exist, but are not allowed to be used.",
+        "code": "interface Dog {\n\tbreed: string;\n};\nconst mix: Dog = {breed: 'mix'};\nconst lab: Dog = {color: 'red', breed: 'lab'};\n// error, no color on Dog type\nlab.color;"
+      }
     }
   ]

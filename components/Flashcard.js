@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Animated, Easing, StyleSheet, TouchableWithoutFeedback } from 'react-native';
+import { Animated, Easing, StyleSheet, Button, View , TouchableNativeFeedback, Text} from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const Flashcard = ({front, back}) => {
     const [currentSide, setCurrentSide] = useState('front');
@@ -55,12 +56,19 @@ const Flashcard = ({front, back}) => {
     });
 
     return (
-      <TouchableWithoutFeedback
-        onPress={() => animate()}>
-        <Animated.View style={styles.container}>
-          {side}
-        </Animated.View>
-      </TouchableWithoutFeedback>
+      <View>
+       <Animated.View style={styles.container}>
+       {side}
+     </Animated.View>
+     <TouchableOpacity
+          onPress={() => animate()}
+          background={TouchableNativeFeedback.SelectableBackground()}
+        >
+          <View style={{backgroundColor: 'gray', marginTop: 10}}>
+            <Text style={{margin: 20, textAlign: 'center'}}>Flip</Text>
+          </View>
+        </TouchableOpacity>
+     </View>
     );
 }
 
