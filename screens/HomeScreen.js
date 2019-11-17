@@ -7,23 +7,34 @@ import {
   View
 } from 'react-native';
 import Flashcard from '../components/Flashcard';
+import SyntaxHighlighter from 'react-native-syntax-highlighter';
+import data from '../data.json';
+
+const BigText = (props) => {
+  return <Text {...props} style={{fontSize: 20}}/>;
+}
 
 export default function HomeScreen() {
-  
-  const data = [
-    {
-      front: <Text>Hello</Text>,
-      back: <Text>Goodbye</Text>
-    },
-    {
-      front: <Text>I want to draw</Text>,
-      back: <Text>a cat for you</Text>
-    },
-    {
-      front: <Text>Skrit</Text>,
-      back: <Text>Bweit</Text>
-    }
-  ]
+  const toText = (obj) => <BigText>{obj.text}</BigText>;
+  const toCode = (obj) => <SyntaxHighlighter
+    highlighter="prism"
+    language='javascript'>
+      {obj.code}
+    </SyntaxHighlighter>
+
+  const toComponent = obj => {
+    return obj.text 
+      ? toText(obj)
+      : obj.code
+        ? toCode(obj)
+        : <div></div>
+  };
+
+  const translatedData = data.map(card => ({
+    front: toComponent(card.front),
+    back: toComponent(card.back)
+  }));
+
   const [currentCard, setCurrentCard] = useState(0);
   const [key, setKey] = useState(0);
 
@@ -34,18 +45,18 @@ export default function HomeScreen() {
             <View style={styles.button}>
               <Button
                 title="Back"
-                disabled={!data[currentCard - 1]}
+                disabled={!translatedData[currentCard - 1]}
                 onPress={() => {
                   setCurrentCard(currentCard - 1)
                   setKey(key + 1);
                 }}
               />
             </View>
-            <Flashcard key={key} front={data[currentCard].front} back={data[currentCard].back} />
+            <Flashcard key={key} front={translatedData[currentCard].front} back={translatedData[currentCard].back} />
             <View style={styles.button}>
               <Button
                 title="Next"
-                disabled={!data[currentCard + 1]}
+                disabled={!translatedData[currentCard + 1]}
                 onPress={() => {
                   setCurrentCard(currentCard + 1);
                   setKey(key + 1);
