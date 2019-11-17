@@ -24,7 +24,8 @@ export default function HomeScreen() {
       back: <Text>Bweit</Text>
     }
   ]
-  const [currentCard, setCurrentCard] = useState(0) 
+  const [currentCard, setCurrentCard] = useState(0);
+  const [key, setKey] = useState(0);
 
   return (
       <ScrollView
@@ -34,15 +35,21 @@ export default function HomeScreen() {
               <Button
                 title="Back"
                 disabled={!data[currentCard - 1]}
-                onPress={() => setCurrentCard(currentCard - 1)}
+                onPress={() => {
+                  setCurrentCard(currentCard - 1)
+                  setKey(key + 1);
+                }}
               />
             </View>
-            <Flashcard front={data[currentCard].front} back={data[currentCard].back} />
+            <Flashcard key={key} front={data[currentCard].front} back={data[currentCard].back} />
             <View style={styles.button}>
               <Button
                 title="Next"
                 disabled={!data[currentCard + 1]}
-                onPress={() => setCurrentCard(currentCard + 1)}
+                onPress={() => {
+                  setCurrentCard(currentCard + 1);
+                  setKey(key + 1);
+                }}
               />
             </View>
       </ScrollView>
