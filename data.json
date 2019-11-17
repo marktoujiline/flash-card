@@ -1,5 +1,88 @@
 [
     {
+      "front" : {
+        "text": "Immediately Invoked Function Expression (IIFE)"
+      },
+      "back": {
+        "text": "It runs as soon as it is defined. It is a Self-Executing Anonymous Function. The variables within the expression can not be accessed from the outside of it."
+      }
+    },
+    {
+      "front" : {
+        "code": "(function () {\n\tstatements\n})();"
+      },
+      "back": {
+        "code": "((x) => \n\t((y) => console.log(y))(x + 2)\n)(5);"
+      }
+    },
+    {
+      "front" : {
+        "text": "How to turn const into expression:\n- Using IIFE"
+      },
+      "back": {
+        "text": "Statement vs Expression:",
+        "code": "const x = 5;\nconst y = x + 2;\nconsole.log(y);\n\n((x) => {\n\tconst y = x + 2;\n\tconsole.log(y);\n})(5);"
+      }
+    },
+    {
+      "front" : {
+        "text": "How to turn loop into expression:\n- Using reccursion"
+      },
+      "back": {
+        "text": "Statement vs Expression:",
+        "code": "let x = 0;\nfor (var i = 0; i < 5; i++) {\n\tx += i;\n}\n\nconst loop = (x, i, max) =>\n\t(i === max)\n\t\t? x\n\t\t: loop(x + i, i + 1, max);\nloop(0, 0, 5);"
+      }
+    },
+    {
+      "front" : {
+        "text": "How to turn conditionals (if else) into expression:\n- Using ternary expressions"
+      },
+      "back": {
+        "text": "Statement vs Expression:",
+        "code": "if (a) {\n\treturn 5;\n} else if (b) {\n\treturn 6;\n} else {\n\treturn 7;\n}\n\n`a ? 5 : 6;`"
+      }
+    },
+    {
+      "front" : {
+        "text": "How to turn a switch statement (or any statement) into expression:\n- Wrapping it in a function:"
+      },
+      "back": {
+        "code": "const s = (a) => {\n\tswitch (a) {\n\t\tcase 'HELLO':\n\t\t\treturn 5;\n\t\tcase 'GOODBYE':\n\t\treturn 6\n\t}\n}\ns('GOODBYE');"
+      }
+    },
+    {
+      "front" : {
+        "text": "What are side effects? \nAction that occurs aside from return value:a side effect is any application state change that is observable outside the called function other than its return value. Side effects include:"
+      },
+      "back": {
+        "text": "Modifying any external variable or object property (e.g., a global variable, or a variable in the parent function scope chain), Logging to the console, Writing to the screen, Writing to a file, Writing to the network, Triggering any external process, Calling any other functions with side-effects"
+      }
+    },
+    {
+      "front" : {
+        "text": "What are the differences between Pure and Impure functions?"
+      },
+      "back": {
+        "text": "Pure Functions:\nDon't have side effects \nImpure Functions:\nModify arguments, Modify variables outside of function (ex: arr.push())"
+      }
+    },
+    {
+      "front" : {
+        "text": "What is immutability?"
+      },
+      "back": {
+        "text": "An immutable object is an object that can’t be modified after it’s created. Conversely, a mutable object is any object which can be modified after it’s created.\nImmutability is a central concept of functional programming because without it, the data flow in your program is lossy."
+      }
+    },
+    {
+      "front" : {
+        "text": "How to debug code?"
+      },
+      "back": {
+        "text": "Figure out what you know\nIsolate the problem\nRead the error message correctly\n\tThe messages print things that you don't need\n\tThe actual error could be anywhere in the message\nRubber duck technique (do it in Slack)\n- while (bugNotFixed {\n\taskQuestions();\n\tgetAnswer();\n})"
+      }
+    },
+      {
       "front": {
         "text": "TS type keyword"
       },
