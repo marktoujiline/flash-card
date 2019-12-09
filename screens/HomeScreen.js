@@ -3,18 +3,30 @@ import {
   StyleSheet,
   Text,
   Button,
-  View
+  View,
+  ScrollView
 } from 'react-native';
 import Flashcard from '../components/Flashcard';
 import SyntaxHighlighter from 'react-native-syntax-highlighter';
 import data from '../data.json';
 
 const BigText = (props) => {
-  return <Text {...props} style={{fontSize: 20}}/>;
+  return <Text {...props} style={{fontSize: 20, margin: 5}}/>;
 }
 
 export default function HomeScreen() {
-  const toText = (obj) => <BigText>{obj.text}</BigText>;
+  const toText = (obj) => obj.code ? (
+  <BigText>{obj.text}</BigText>
+  ) : (
+    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+      <ScrollView style={{flexGrow: 0}}>
+        <BigText>{obj.text}</BigText>
+      </ScrollView>
+  </View>
+  )
+  
+  
+  ;
   const toCode = (obj) => <SyntaxHighlighter
     highlighter="prism"
     customStyle={{padding: 0, margin: 0 }}
